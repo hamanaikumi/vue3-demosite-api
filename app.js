@@ -45,7 +45,7 @@ MongoClient.connect(DATABASE_URL, async (error, client) => {
     app.use("/s3url", s3urlRouter);
 
     // start express server
-    var server = app.listen(3000, function () {
+    var server = app.listen(process.env.PORT || 3000, function () {
       console.log("Node.js is listening to PORT:" + server.address().port);
     });
   }
