@@ -1,9 +1,10 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const app = express();
-
 // cors設定
 const cors = require("cors");
+const PORT = process.env.PORT || 3000;
+
 app.use(cors());
 
 app.use(express.json());
@@ -45,7 +46,7 @@ MongoClient.connect(DATABASE_URL, async (error, client) => {
     app.use("/s3url", s3urlRouter);
 
     // start express server
-    var server = app.listen(process.env.PORT || 3000, function () {
+    var server = app.listen(PORT, function () {
       console.log("Node.js is listening to PORT:" + server.address().port);
     });
   }
