@@ -42,6 +42,9 @@ MongoClient.connect(DATABASE_URL, async (error, client) => {
     const shopRouter = require("./routes/shop");
     app.use("/shop", shopRouter);
 
+    const signInRouter = require("./routes/signIn");
+    app.use("/signIn", signInRouter);
+
     const s3urlRouter = require("./routes/s3url");
     app.use("/s3url", s3urlRouter);
 
