@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
   const collection = res.app.locals.db.collection("drink");
   // id取得
   const array = await res.app.locals.db.collection("drink").find().toArray();
-  const id = array.length + 1;
+  const id = array[array.length - 1].id + 1;
 
   await collection.insertOne(
     {
