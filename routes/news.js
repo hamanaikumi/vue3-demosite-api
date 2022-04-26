@@ -10,11 +10,11 @@ router.post("/", async (req, res) => {
   const collection = res.app.locals.db.collection("news");
   // id取得
   const array = await res.app.locals.db.collection("news").find().toArray();
-  const id = array[array.length - 1].id + 1;
+  const lastId = array.slice(-1)[0].id;
 
   await collection.insertOne(
     {
-      id: id,
+      id: lastId + 1,
       date: req.body.date,
       title: req.body.title,
       detail: req.body.detail,
@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
         res.send({
           status: "success",
           data: {
-            id: id,
+            id: lastId + 1,
             date: req.body.date,
             title: req.body.title,
             detail: req.body.detail,
