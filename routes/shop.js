@@ -43,4 +43,15 @@ router.post("/", async (req, res) => {
   );
 });
 
+router.delete("/", async (req, res) => {
+  try {
+    res.app.locals.db.collection("shop").deleteOne({ id: req.body.id });
+    res.send({
+      status: "success",
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 module.exports = router;
