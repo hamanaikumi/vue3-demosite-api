@@ -34,22 +34,15 @@ async function generateUploadURL() {
 }
 module.exports.generateUploadURL = generateUploadURL;
 
-// delete files from S3
-async function deleteFiles(urlArray) {
-  let keyArray = [];
-  for (let url of urlArray) {
-    const key = url.split("amazonaws.com/").pop();
-    keyArray.push({ Key: key });
-  }
+// delete a file from S3
+async function deleteFile(image) {
+  const key = image.split("amazonaws.com/").pop();
   const params = {
     Bucket: bucketName,
-    Delete: {
-      Objects: keyArray,
-    },
+    Key: key,
   };
-  await s3.deleteObjects(params, function (err, data) {
-    // an error occurred
+  await s3.deleteObject(params, function (err, data) {
     if (err) console.log(err, err.stack);
   });
 }
-module.exports.deleteFiles = deleteFiles;
+module.exports.deleteFile = deleteFile;
